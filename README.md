@@ -1,11 +1,15 @@
+### Source https://github.com/wildcant/circle-advanced-setup-workflow
+
+### Found at https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
+
 # Path filtering + config splitting on CircleCI
 
 This repository demonstrates an advanced use case of setup workflow feature on CircleCI. For instance, it implements both path filtering and config splitting.
 
 ## Files
 
-* `.circleci/config.yml` implements both 1) the setup workflow, and 2) common resources (i.e., jobs and commands) for main workflows/jobs.
-* `module-a/.circleci/config.yml`, `module-b/.circleci/config.yml`, and `module-c/.circleci/config.yml` implement independent modular configs for module A, B, and C, respectively.
+- `.circleci/config.yml` implements both 1) the setup workflow, and 2) common resources (i.e., jobs and commands) for main workflows/jobs.
+- `module-a/.circleci/config.yml`, `module-b/.circleci/config.yml`, and `module-c/.circleci/config.yml` implement independent modular configs for module A, B, and C, respectively.
 
 ## How does it work?
 
