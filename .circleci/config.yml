@@ -21,7 +21,9 @@ commands:
     steps:
       - run: echo 'pipeline.id << pipeline.id >>'
       - run: echo 'pipeline.trigger_parameters.circleci.event_type << pipeline.trigger_parameters.circleci.event_type >>'
-
+  echo-diff:
+    steps:
+      - run: yarn build --filter='...[HEAD^]' --dry-run=json
 jobs:
   build:
     docker:
