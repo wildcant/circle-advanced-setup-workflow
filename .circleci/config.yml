@@ -22,6 +22,7 @@ commands:
       - run: echo 'pipeline.id << pipeline.id >>'
   echo-diff:
     steps:
+      - checkout
       - run: yarn build --filter='...[HEAD^]' --dry-run=json
 jobs:
   build:
