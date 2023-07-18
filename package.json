@@ -4,6 +4,9 @@
   "workspaces": [
     "apps/*"
   ],
+  "scripts": {
+    "build": "turbo build"
+  },
   "devDependencies": {
     "turbo": "^1.10.7"
   }
