@@ -23,6 +23,10 @@ commands:
   echo-diff:
     steps:
       - checkout
+      ## install packages
+      - run:
+          name: 'Install packages'
+          command: yarn
       - run: yarn build --filter='...[HEAD^]' --dry-run=json
 jobs:
   build:
