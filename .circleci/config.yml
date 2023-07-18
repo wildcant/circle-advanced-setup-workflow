@@ -20,6 +20,7 @@ commands:
   echo-vars-2:
     steps:
       - run: echo 'pipeline.id << pipeline.id >>'
+      - run: echo 'pipeline.trigger_parameters.circleci.event_type << pipeline.trigger_parameters.circleci.event_type >>'
 
 jobs:
   build:
