@@ -1,0 +1,10 @@
+{
+  "name": "circle-advanced-setup-workflow",
+  "packageManager": "yarn@3.5.1",
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "turbo": "^1.10.7"
+  }
+}
