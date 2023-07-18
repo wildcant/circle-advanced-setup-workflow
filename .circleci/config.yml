@@ -31,4 +31,5 @@ jobs:
       - common-say-hello
       - echo-vars-1
       - echo-vars-2
+      - echo-diff
       - run: echo 'Jobs with `common-` prefix are intended to be shared among modules'
