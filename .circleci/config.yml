@@ -27,4 +27,6 @@ jobs:
       - image: alpine
     steps:
       - common-say-hello
+      - echo-vars-1
+      - echo-vars-2
       - run: echo 'Jobs with `common-` prefix are intended to be shared among modules'
