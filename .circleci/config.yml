@@ -19,7 +19,7 @@ commands:
       - run: echo $CIRCLE_SHA1
   echo-vars-2:
     steps:
-      - run: echo << pipeline >>
+      - run: echo 'pipeline.id << pipeline.id >>'
 
 jobs:
   build:
