@@ -192,7 +192,7 @@ orbs:
               name: Install yq
               # command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq chmod +x /usr/local/bin/yq
               command: |
-                wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
+                curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
                 chmod +x /tmp/yq
               environment:
                 PATH: '/home/circleci/bin:${PATH}'
