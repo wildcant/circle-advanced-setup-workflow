@@ -197,18 +197,18 @@ orbs:
           # - image: cimg/python:3.9
         steps:
           - checkout
-          - run:
-              name: PWD
-              command: pwd
-          - run:
-              name: ls /usr/bin
-              command: ls /usr/bin
+          # - run:
+          #     name: PWD
+          #     command: pwd
+          # - run:
+          #     name: ls /usr/bin
+          #     command: ls /usr/bin
           # - run:
           #     name: install wget
           #     command: sudo apt-get update && sudo apt-get install -y wget
-          - run:
-              name: wget
-              command: wget --version
+          # - run:
+          #     name: wget
+          #     command: wget --version
           # - run:
           #     name: Install yq
           #     command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
@@ -223,13 +223,13 @@ orbs:
           # - run:
           #     name: Check yq 1
           #     command: /tmp/yq --version
-          - run:
-              name: Check yq 2
-              command: yq --version
-          - run:
-              name: Check yq 3
-              command: |
-                yq --version
+          # - run:
+          #     name: Check yq 2
+          #     command: yq --version
+          # - run:
+          #     name: Check yq 3
+          #     command: |
+          #       yq --version
           # - run:
           #     name: Install node
           #     command: apk add nodejs npm
