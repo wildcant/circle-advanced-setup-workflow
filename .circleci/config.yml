@@ -113,8 +113,6 @@ orbs:
             type: string
             default: .circleci/continue-config.yml
         steps:
-          - run: << parameters.modules >>
-          - run: echo << parameters.modules >>
           - run:
               name: Merge configs
               command: |
@@ -136,6 +134,10 @@ orbs:
                 fi
 
                 xargs -a "<< parameters.modules >>" yq -y -s 'reduce .[] as $item ({}; . * $item)' | tee "<< parameters.continue-config >>"
+          - run:
+              name: Inspect
+              command: |
+                echo "<< parameters.modules >>"
 
     jobs:
       # The job for the setup workflow
