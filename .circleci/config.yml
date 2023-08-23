@@ -199,7 +199,7 @@ orbs:
               name: Install yq
               command: |
                 sudo apt-get update
-                sudo apt-get install -y wget
+                # sudo apt-get install -y wget
                 # mkdir tmp/bin
                 # wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
               # command: |
