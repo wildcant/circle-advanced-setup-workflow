@@ -1,43 +1,34 @@
-# Config for the setup workflow and common resources (jobs, commands) for main workflows
-# `common-` prefix is added for common resources (to avoid conflicts with module resources)
-
 version: 2.1
 
-# Custom commands aimed for the main workflows and jobs
-commands:
-  common-say-hello:
-    parameters:
-      to:
-        description: To whom you say hello
-        type: string
-        default: you anonymous
-    steps:
-      - run: echo 'Greetings to << parameters.to >> from the shared command!'
-  echo-vars-1:
-    steps:
-      - run: echo CIRCLE_SHA1
-      - run: echo $CIRCLE_SHA1
-  echo-vars-2:
-    steps:
-      - run: echo 'pipeline.id << pipeline.id >>'
-  echo-diff:
-    steps:
-      - checkout
-      ## install packages
-      - run:
-          name: 'Install packages'
-          command: yarn
-      - run: yarn build --filter='...[HEAD^]' --dry-run=json
-      - run:
-          name: Run script
-          command: ./.circleci/turbo-changed.sh
 jobs:
-  build:
+  build-test:
     docker:
       - image: cimg/node:17.1.0
     steps:
-      - common-say-hello
-      - echo-vars-1
-      - echo-vars-2
-      - echo-diff
-      - run: echo 'Jobs with `common-` prefix are intended to be shared among modules'
+      - checkout
+      - run:
+          name: Install packages
+          command: yarn install
+      - run:
+          name: 'Echo turbo dry json'
+          command: yarn diff
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Run tests
+          command: yarn test
+
+  playground:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: Run script
+          command: ./.circleci/scripts/turbo-changed.sh
+
+workflows:
+  ci:
+    jobs:
+      - playground
