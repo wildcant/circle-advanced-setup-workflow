@@ -97,7 +97,6 @@ orbs:
                 cat \<< EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; if [ << parameters.force-all >> == 'true' ] || [ $(git diff --name-only << parameters.base-revision >> "$module" | wc -l) -gt 0 ] || (! git rev-parse --verify HEAD~1) || [ $(git diff --name-only HEAD~1 "$module" | wc -l) -gt 0 ]; then echo "$row" | sed -e 's/ /\n/g' >> << parameters.modules-filtered >>; fi; done
                 << parameters.modules >>
                 EOD
-          - run: cat << parameters.modules-filtered >>
 
       merge-modular-configs:
         parameters:
@@ -114,6 +113,9 @@ orbs:
             type: string
             default: .circleci/continue-config.yml
         steps:
+          - run: cat << parameters.modules >>
+          - run: echo << parameters.modules >>
+          - run: << parameters.modules >>
           - run:
               name: Merge configs
               command: |
