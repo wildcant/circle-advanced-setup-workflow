@@ -113,7 +113,7 @@ orbs:
                 echo ''
 
                 # Create the output file and write the filtered and cleaned input to it
-                echo "$cleaned_input" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | grep -v '//' | sed 's/^/apps\//' > "$output_file"
+                echo "$cleaned_input" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | grep -v '//' | sed 's/^/apps\//' > "<< parameters.modules-filtered >>"
 
                 echo "Output has been written to "
                 echo << parameters.modules-filtered >>
