@@ -188,12 +188,12 @@ orbs:
           # - image: cimg/python:3.9
         steps:
           - checkout
-          # - run:
-          #     name: Install yq
-          #     command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq
           - run:
               name: Install yq
-              command: pip install yq
+              command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq
+          # - run:
+          #     name: Install yq
+          #     command: pip install yq
           - run:
               name: Check yq
               command: yq --version
