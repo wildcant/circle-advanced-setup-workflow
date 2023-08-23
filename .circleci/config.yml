@@ -203,7 +203,7 @@ orbs:
               command: wget --version
           - run:
               name: Install yq
-              command: mkdir tmp/bin && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
+              command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
               # environment:
               #   PATH: '/tmp/bin:${PATH}'
               # command: |
@@ -213,7 +213,10 @@ orbs:
           #     name: Install yq
           #     command: pip install yq
           - run:
-              name: Check yq
+              name: Check yq 1
+              command: /tmp/yq --version
+          - run:
+              name: Check yq 2
               command: yq --version
           # - run:
           #     name: Install node
