@@ -204,8 +204,8 @@ orbs:
           - run:
               name: Install yq
               command: mkdir tmp/bin && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
-              environment:
-                PATH: '/tmp/bin:${PATH}'
+              # environment:
+              #   PATH: '/tmp/bin:${PATH}'
               # command: |
               #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
               #   chmod +x /tmp/yq
