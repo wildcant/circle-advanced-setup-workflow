@@ -102,7 +102,7 @@ orbs:
                 echo ''
 
                 echo 'generating diff with turbo'
-                input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq '.packages')
+                input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
                 echo $input
                 echo ''
 
@@ -209,20 +209,20 @@ orbs:
           - run:
               name: wget
               command: wget --version
-          - run:
-              name: Install yq
-              command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
-              # environment:
-              #   PATH: '/tmp/bin:${PATH}'
-              # command: |
-              #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
-              #   chmod +x /tmp/yq
+          # - run:
+          #     name: Install yq
+          #     command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
+          # environment:
+          #   PATH: '/tmp/bin:${PATH}'
+          # command: |
+          #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
+          #   chmod +x /tmp/yq
           # - run:
           #     name: Install yq
           #     command: pip install yq
-          - run:
-              name: Check yq 1
-              command: /tmp/yq --version
+          # - run:
+          #     name: Check yq 1
+          #     command: /tmp/yq --version
           - run:
               name: Check yq 2
               command: yq --version
