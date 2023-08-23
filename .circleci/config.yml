@@ -37,7 +37,7 @@ commands:
 jobs:
   common-pre:
     docker:
-      - image: cimg/node:17.1.0
+      - image: alpine
     steps:
       - common-say-hello
       - run: echo 'Jobs with `common-` prefix are intended to be shared among modules'
@@ -184,12 +184,19 @@ orbs:
             type: string
             default: .circleci/continue-config.yml
         docker:
+          # - image: cimg/node:17.1.0
           - image: cimg/python:3.9
         steps:
           - checkout
+          # - run:
+          #     name: Install yq
+          #     command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq
           - run:
               name: Install yq
               command: pip install yq
+          - run:
+              name: Check yq
+              command: yq --version
           - list-changed-modules:
               modules: << parameters.modules >>
               modules-filtered: << parameters.modules-filtered >>
