@@ -37,7 +37,7 @@ commands:
 jobs:
   common-pre:
     docker:
-      - image: alpine
+      - image: cimg/node:17.1.0
     steps:
       - common-say-hello
       - run: echo 'Jobs with `common-` prefix are intended to be shared among modules'
