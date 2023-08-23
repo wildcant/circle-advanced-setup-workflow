@@ -197,9 +197,9 @@ orbs:
           # - image: cimg/python:3.9
         steps:
           - checkout
-          - run:
-              name: Update packages
-              command: sudo apt-get update && sudo apt-get upgrade
+          # - run:
+          #     name: Update packages
+          #     command: sudo apt-get update && sudo apt-get upgrade
           # - run:
           #     name: ls /bin
           #     command: ls /usr/bin
