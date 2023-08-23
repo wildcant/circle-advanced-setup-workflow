@@ -113,9 +113,8 @@ orbs:
             type: string
             default: .circleci/continue-config.yml
         steps:
-          - run: cat << parameters.modules >>
-          - run: echo << parameters.modules >>
           - run: << parameters.modules >>
+          - run: echo << parameters.modules >>
           - run:
               name: Merge configs
               command: |
