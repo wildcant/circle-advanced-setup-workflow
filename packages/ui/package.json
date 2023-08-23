@@ -1,0 +1,7 @@
+{
+  "name": "ui",
+  "packageManager": "yarn@3.5.1",
+  "scripts": {
+    "build": "echo building ui"
+  }
+}
