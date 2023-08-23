@@ -195,32 +195,20 @@ orbs:
           - run:
               name: ls /usr/bin
               command: ls /usr/bin
-          - run:
-              name: sudo apt-get update
-              command: sudo apt-get update
+          # - run:
+          #     name: install wget
+          #     command: sudo apt-get update && sudo apt-get install -y wget
           - run:
               name: wget
-              command: sudo apt-get install -y wget
+              command: wget --version
           - run:
               name: Install yq
-              command: |
-                echo '/usr/bin'
-                ls /usr/bin
-                echo ''
-
-                echo 'bin'
-                ls /bin
-                echo ''
-
-              #   sudo apt-get update
-              #   # sudo apt-get install -y wget
-              #   # mkdir tmp/bin
-              #   # wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
+              command: mkdir tmp/bin && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
+              environment:
+                PATH: '/tmp/bin:${PATH}'
               # command: |
               #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
               #   chmod +x /tmp/yq
-              environment:
-                PATH: '/tmp/bin:${PATH}'
           # - run:
           #     name: Install yq
           #     command: pip install yq
