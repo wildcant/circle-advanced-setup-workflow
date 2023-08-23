@@ -190,6 +190,12 @@ orbs:
         steps:
           - checkout
           - run:
+              name: PWD
+              command: pwd
+          - run:
+              name: ls
+              command: ls
+          - run:
               name: Install yq
               # command: apk update && apk add curl curl-dev bash
               command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
