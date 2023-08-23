@@ -184,8 +184,8 @@ orbs:
             type: string
             default: .circleci/continue-config.yml
         docker:
-          - image: alpine
-          # - image: cimg/node:17.1.0
+          # - image: alpine
+          - image: cimg/node:17.1.0
           # - image: cimg/python:3.9
         steps:
           - checkout
@@ -197,8 +197,10 @@ orbs:
               command: ls
           - run:
               name: Install yq
-              # command: apk update && apk add curl curl-dev bash
-              command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
+              command: |
+                apt-get update
+                apt-get install yq
+              # command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
               # command: |
               #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
               #   chmod +x /tmp/yq
@@ -210,12 +212,12 @@ orbs:
           - run:
               name: Check yq
               command: yq --version
-          - run:
-              name: Install node
-              command: apk add nodejs npm
-          - run:
-              name: node version
-              command: node --version
+          # - run:
+          #     name: Install node
+          #     command: apk add nodejs npm
+          # - run:
+          #     name: node version
+          #     command: node --version
           - run:
               name: npx version
               command: npx --version
