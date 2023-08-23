@@ -23,8 +23,6 @@ commands:
   echo-diff:
     steps:
       - checkout
-      - node/install-packages:
-        pkg-manager: yarn
       ## install packages
       - run:
           name: 'Install packages'
