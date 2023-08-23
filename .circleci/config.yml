@@ -7,6 +7,7 @@ commands:
   echo-diff:
     steps:
       - checkout
+      - run: npx turbo run build --filter='...^[HEAD^]' --dry-run=json'
       - run: npx turbo run build --filter='...^[HEAD^]' --dry-run=json | jq '.packages'
 
 jobs:
