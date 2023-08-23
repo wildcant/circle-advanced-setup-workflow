@@ -23,11 +23,16 @@ commands:
   echo-diff:
     steps:
       - checkout
+      - node/install-packages:
+        pkg-manager: yarn
       ## install packages
       - run:
           name: 'Install packages'
           command: yarn
       - run: yarn build --filter='...[HEAD^]' --dry-run=json
+      - run:
+          name: Run script
+          command: ./.circleci/turbo-changed.sh
 jobs:
   build:
     docker:
