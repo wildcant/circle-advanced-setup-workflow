@@ -218,6 +218,10 @@ orbs:
           - run:
               name: Check yq 2
               command: yq --version
+          - run:
+              name: Check yq 3
+              command: |
+                yq --version
           # - run:
           #     name: Install node
           #     command: apk add nodejs npm
