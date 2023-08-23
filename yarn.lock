@@ -2829,6 +2829,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"module-c@workspace:apps/module-c":
+  version: 0.0.0-use.local
+  resolution: "module-c@workspace:apps/module-c"
+  dependencies:
+    ui: "*"
+  languageName: unknown
+  linkType: soft
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
