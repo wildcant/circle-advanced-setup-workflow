@@ -213,6 +213,9 @@ orbs:
           #     name: wget
           #     command: wget --version
           - run:
+              name: xargs
+              command: xargs --version
+          - run:
               name: Install yq
               command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
           # environment:
