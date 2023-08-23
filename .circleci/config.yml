@@ -97,6 +97,10 @@ orbs:
                 npx turbo run build --filter='...^[HEAD^]' --dry-run=json
                 echo ''
 
+                echo 'yq --help'
+                yq --help
+                echo ''
+
                 echo 'generating diff with turbo'
                 input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq '.packages')
                 echo $input
