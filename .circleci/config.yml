@@ -193,8 +193,14 @@ orbs:
               name: PWD
               command: pwd
           - run:
-              name: ls
-              command: ls
+              name: ls /usr/bin
+              command: ls /usr/bin
+          - run:
+              name: sudo apt-get update
+              command: sudo apt-get update
+          - run:
+              name: wget
+              command: sudo apt-get install -y wget
           - run:
               name: Install yq
               command: |
@@ -206,10 +212,10 @@ orbs:
                 ls /bin
                 echo ''
 
-                sudo apt-get update
-                # sudo apt-get install -y wget
-                # mkdir tmp/bin
-                # wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
+              #   sudo apt-get update
+              #   # sudo apt-get install -y wget
+              #   # mkdir tmp/bin
+              #   # wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
               # command: |
               #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
               #   chmod +x /tmp/yq
