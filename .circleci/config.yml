@@ -190,7 +190,13 @@ orbs:
           - checkout
           - run:
               name: Install yq
-              command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq chmod +x /usr/local/bin/yq
+              # command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq chmod +x /usr/local/bin/yq
+              command: |
+                mkdir -p /home/circleci/bin
+                wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /home/circleci/bin/yq
+                chmod +x /home/circleci/bin/yq
+              environment:
+                PATH: '/home/circleci/bin:${PATH}'
           # - run:
           #     name: Install yq
           #     command: pip install yq
