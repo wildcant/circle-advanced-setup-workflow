@@ -1,34 +1,14 @@
 version: 2.1
 
+commands:
+  echo-diff:
+    steps:
+      - checkout
+      - run: yarn build --filter='...[HEAD^]' --dry-run=json
+
 jobs:
-  build-test:
+  build:
     docker:
       - image: cimg/node:17.1.0
     steps:
-      - checkout
-      - run:
-          name: Install packages
-          command: yarn install
-      - run:
-          name: 'Echo turbo dry json'
-          command: yarn diff
-      - run:
-          name: Build
-          command: yarn build
-      - run:
-          name: Run tests
-          command: yarn test
-
-  playground:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - checkout
-      - run:
-          name: Run script
-          command: ./.circleci/turbo-changed.sh
-
-workflows:
-  ci:
-    jobs:
-      - playground
+      - echo-diff
