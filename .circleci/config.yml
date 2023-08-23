@@ -1,10 +1,13 @@
 version: 2.1
 
+orbs:
+  jq: circleci/jq@2.2.0
+
 commands:
   echo-diff:
     steps:
       - checkout
-      - run: npx turbo run build --filter='...^[2077e102987675fd2f39d7bec49d251e5eeccf70]' --dry-run=json
+      - run: npx turbo run build --filter='...^[HEAD^]' --dry-run=json | jq '.packages'
 
 jobs:
   build:
