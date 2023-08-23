@@ -197,9 +197,9 @@ orbs:
           # - image: cimg/python:3.9
         steps:
           - checkout
-          # - run:
-          #     name: PWD
-          #     command: pwd
+          - run:
+              name: Update packages
+              command: sudo apt-get update && sudo apt-get upgrade
           # - run:
           #     name: ls /usr/bin
           #     command: ls /usr/bin
@@ -226,10 +226,10 @@ orbs:
           # - run:
           #     name: Check yq 2
           #     command: yq --version
-          # - run:
-          #     name: Check yq 3
-          #     command: |
-          #       yq --version
+          - run:
+              name: Check yq 3
+              command: |
+                yq --version
           # - run:
           #     name: Install node
           #     command: apk add nodejs npm
