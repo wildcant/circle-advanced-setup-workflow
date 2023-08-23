@@ -107,7 +107,7 @@ orbs:
                 echo ''
 
                 # Remove the square brackets and quotes from the input string
-                echo('Remove the square brackets and quotes from the input string')
+                echo 'Remove the square brackets and quotes from the input string'
                 cleaned_input=$(echo "$input" | tr -d '[]"' | tr ',' '\n')
                 echo $cleaned_input
                 echo ''
