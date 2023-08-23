@@ -214,12 +214,12 @@ orbs:
           - run:
               name: Check yq
               command: yq --version
-          # - run:
-          #     name: Install node
-          #     command: apk add nodejs npm
-          # - run:
-          #     name: node version
-          #     command: node --version
+          - run:
+              name: Install node
+              command: apk add nodejs npm
+          - run:
+              name: node version
+              command: node --version
           - run:
               name: npx version
               command: npx --version
