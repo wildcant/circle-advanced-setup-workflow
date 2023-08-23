@@ -97,12 +97,12 @@ orbs:
                 npx turbo run build --filter='...^[HEAD^]' --dry-run=json
                 echo ''
 
-                echo 'yq --help'
-                yq --help
+                echo '/tmp/yq  --help'
+                /tmp/yq --help
                 echo ''
 
                 echo 'generating diff with turbo'
-                input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
+                input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | /tmp/yq '.packages')
                 echo $input
                 echo ''
 
@@ -162,7 +162,7 @@ orbs:
                 echo ''
 
                 echo 'generated config file'
-                xargs -a "<< parameters.modules >>" yq -y -s 'reduce .[] as $item ({}; . * $item)' | tee "<< parameters.continue-config >>"
+                xargs -a "<< parameters.modules >>" /tmp/yq -y -s 'reduce .[] as $item ({}; . * $item)' | tee "<< parameters.continue-config >>"
 
     jobs:
       # The job for the setup workflow
@@ -201,6 +201,9 @@ orbs:
               name: Update packages
               command: sudo apt-get update && sudo apt-get upgrade
           # - run:
+          #     name: ls /bin
+          #     command: ls /usr/bin
+          # - run:
           #     name: ls /usr/bin
           #     command: ls /usr/bin
           # - run:
@@ -209,9 +212,9 @@ orbs:
           # - run:
           #     name: wget
           #     command: wget --version
-          # - run:
-          #     name: Install yq
-          #     command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
+          - run:
+              name: Install yq
+              command: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq && chmod +x /tmp/yq
           # environment:
           #   PATH: '/tmp/bin:${PATH}'
           # command: |
@@ -220,16 +223,16 @@ orbs:
           # - run:
           #     name: Install yq
           #     command: pip install yq
-          # - run:
-          #     name: Check yq 1
-          #     command: /tmp/yq --version
+          - run:
+              name: Check yq 1
+              command: /tmp/yq --version
           # - run:
           #     name: Check yq 2
           #     command: yq --version
           - run:
               name: Check yq 3
               command: |
-                yq --version
+                /tmp/yq --version --version
           # - run:
           #     name: Install node
           #     command: apk add nodejs npm
