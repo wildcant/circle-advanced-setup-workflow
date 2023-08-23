@@ -198,6 +198,14 @@ orbs:
           - run:
               name: Install yq
               command: |
+                echo '/usr/bin'
+                ls /usr/bin
+                echo ''
+
+                echo 'bin'
+                ls /bin
+                echo ''
+
                 sudo apt-get update
                 # sudo apt-get install -y wget
                 # mkdir tmp/bin
