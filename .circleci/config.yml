@@ -200,8 +200,8 @@ orbs:
               command: |
                 sudo apt-get update
                 sudo apt-get install -y wget
-                mkdir tmp/bin
-                wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
+                # mkdir tmp/bin
+                # wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/bin/yq && chmod +x /tmp/bin/yq
               # command: |
               #   curl https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
               #   chmod +x /tmp/yq
