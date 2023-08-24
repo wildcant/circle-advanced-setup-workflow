@@ -94,13 +94,22 @@ orbs:
               name: Generate the list of modules having changes
               command: |
                 modules_filtered=<< parameters.modules-filtered >>
+                force_all=<< parameters.force-all >>
 
-                modules=echo "$(cat <<EOF | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; echo "$row" | sed -e 's/ /\n/g'; done
-                << parameters.modules >>
-                EOD
-                )"
+                if [ $force_all == 'true' ]
+                then
+                  echo 'forcing build in all apps'
+                  
+                  # Add each module to `modules-filtered` if`force-all` is set to `true`
+                  # TODO: check the following conditions: , 2) there is a diff against `base-revision`, 3) there is no `HEAD~1` (i.e., this is the very first commit for the repo) OR 4) there is a diff against the previous commit
+                  cat \<< EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; echo "$row" | sed -e 's/ /\n/g' >> $modules_filtered; done
+                  << parameters.modules >>
+                  EOD 
 
-                echo $modules
+                  echo 'Output has been written to' $modules_filtered  ' with the following content:'
+                  cat $modules_filtered
+                  exit
+                fi
 
                 # Remove the square brackets and quotes from the input string
                 cleaned_input=$(echo "$input" | tr -d '[]"' | tr ',' '\n')
