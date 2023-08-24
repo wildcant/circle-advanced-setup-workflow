@@ -103,7 +103,7 @@ orbs:
                       modules_filtered=<< parameters.modules-filtered >>
 
                       echo 'generating diff with turbo'
-                      input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
+                      input=$(npx turbo run build --filter='{./apps/*}...[HEAD^]' --dry-run=json | yq e '.packages' -)
                       echo $input
                       echo ''
 
