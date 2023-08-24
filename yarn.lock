@@ -2837,6 +2837,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"module-d@workspace:apps/module-d":
+  version: 0.0.0-use.local
+  resolution: "module-d@workspace:apps/module-d"
+  languageName: unknown
+  linkType: soft
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
