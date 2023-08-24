@@ -1,7 +1,7 @@
 #!/bin/bash
 
-modules='output.txt' # "<< parameters.modules >>"
-shared_config='.circleci/config.yml' # "<< parameters.shared-config >>"
+modules='output.txt' # << parameters.modules >>
+shared_config='.circleci/config.yml' # << parameters.shared-config >>
 continue_config='.circleci/continue-config.yml' # << parameters.continue-config >>
 
 # If `modules` is unavailable, stop this job without continuation
