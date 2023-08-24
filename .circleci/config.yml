@@ -90,7 +90,7 @@ orbs:
                 - run:
                     name: Forcing build of all modules
                     command: |
-                      # Add each module to `modules-filtered` if 1) `force-all` is set to `true`, 2) there is a diff against `base-revision`, 3) there is no `HEAD~1` (i.e., this is the very first commit for the repo) OR 4) there is a diff against the previous commit
+                      # Add each module to `modules-filtered`
                       cat \<< EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; echo "$row" | sed -e 's/ /\n/g' >> << parameters.modules-filtered >>; done
                       << parameters.modules >>
                       EOD
