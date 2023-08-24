@@ -94,6 +94,9 @@ orbs:
               name: Generate the list of modules having changes
               command: |
                 modules_filtered=<< parameters.modules-filtered >>
+                modules=<< parameters.modules >>
+
+                echo $modules
 
                 echo 'generating diff with turbo'
                 input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
