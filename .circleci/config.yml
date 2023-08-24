@@ -96,6 +96,10 @@ orbs:
                 modules=<< parameters.modules >>
                 force_all=<< parameters.force-all >>
                 modules_filtered=<< parameters.modules-filtered >>
+                echo 'inspect'
+                echo $modules
+                echo "$modules"
+                echo ''
 
                 if [ $force_all == 'true' ]
                 then
