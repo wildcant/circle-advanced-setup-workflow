@@ -139,7 +139,7 @@ orbs:
                 if [ ! -f $modules ] || [ ! -s $modules ]
                 then
                   echo 'Nothing to merge. Halting the job.'
-                  # circleci-agent step halt
+                  circleci-agent step halt
                   exit
                 fi
 
