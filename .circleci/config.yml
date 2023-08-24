@@ -101,9 +101,8 @@ orbs:
                 echo ''
 
                 # Remove the square brackets and quotes from the input string
-                echo 'Remove the square brackets and quotes from the input string'
                 cleaned_input=$(echo "$input" | tr -d '[]"' | tr ',' '\n')
-                echo $cleaned_input
+                echo 'Cleared list of apps that changed' $cleaned_input
                 echo ''
 
                 # If app changed list is empty then exit.
@@ -248,9 +247,9 @@ orbs:
           # - run:
           #     name: node version
           #     command: node --version
-          - run:
-              name: npx version
-              command: npx --version
+          # - run:
+          #     name: npx version
+          #     command: npx --version
           - list-changed-modules:
               modules: << parameters.modules >>
               modules-filtered: << parameters.modules-filtered >>

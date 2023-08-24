@@ -1,1 +1,1 @@
-export const MODULE = 'module-a-and-c-ui'
+export const MODULE = 'module-a-ui'
