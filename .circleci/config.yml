@@ -90,51 +90,49 @@ orbs:
             type: boolean
             default: false
         steps:
-          - run:
-              name: Generate the list of modules that will be build
-              - when:
-                  condition: << parameters.force-all  >>
-                  steps:
-                    - run:
-                        name: Forcing build of all modules
-                        command: |
-                          # Add each module to `modules-filtered` if 1) `force-all` is set to `true`, 2) there is a diff against `base-revision`, 3) there is no `HEAD~1` (i.e., this is the very first commit for the repo) OR 4) there is a diff against the previous commit
-                          cat \<< EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; echo "$row" | sed -e 's/ /\n/g' >> << parameters.modules-filtered >>; done
-                          << parameters.modules >>
-                          EOD 
-              - unless:
-                  condition: << parameters.preinstall-foo >>
-                  steps:
-                    - run:
-                        name: Checking which modules changed
-                        command: |
-                          modules_filtered=<< parameters.modules-filtered >>
+          - run: echo 'Generating the list of modules that will be build'
+          - when:
+              condition: << parameters.force-all  >>
+              steps:
+                - run:
+                    name: Forcing build of all modules
+                    command: |
+                      # Add each module to `modules-filtered` if 1) `force-all` is set to `true`, 2) there is a diff against `base-revision`, 3) there is no `HEAD~1` (i.e., this is the very first commit for the repo) OR 4) there is a diff against the previous commit
+                      cat \<< EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; echo "$row" | sed -e 's/ /\n/g' >> << parameters.modules-filtered >>; done
+                      << parameters.modules >>
+                      EOD
+          - unless:
+              condition: << parameters.force-all >>
+              steps:
+                - run:
+                    name: Checking which modules changed
+                    command: |
+                      modules_filtered=<< parameters.modules-filtered >>
 
-                          echo 'generating diff with turbo'
-                          input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
-                          echo $input
-                          echo ''
+                      echo 'generating diff with turbo'
+                      input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
+                      echo $input
+                      echo ''
 
-                          # Remove the square brackets and quotes from the input string
-                          cleaned_input=$(echo "$input" | tr -d '[]"' | tr ',' '\n')
-                          echo 'Cleared list of apps that changed' $cleaned_input
-                          echo ''
+                      # Remove the square brackets and quotes from the input string
+                      cleaned_input=$(echo "$input" | tr -d '[]"' | tr ',' '\n')
+                      echo 'Cleared list of apps that changed' $cleaned_input
+                      echo ''
 
-                          # If app changed list is empty then exit.
-                          if [ -z "$cleaned_input" ]
-                          then
-                            echo 'No package changed, exiting.'
-                            circleci-agent step halt
-                            exit
-                          fi
+                      # If app changed list is empty then exit.
+                      if [ -z "$cleaned_input" ]
+                      then
+                        echo 'No package changed, exiting.'
+                        circleci-agent step halt
+                        exit
+                      fi
 
-                          # Create the output file and write the filtered and cleaned input to it
-                          echo "$cleaned_input" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | grep -v '//' | sed 's/^/apps\//' > "$modules_filtered"
+                      # Create the output file and write the filtered and cleaned input to it
+                      echo "$cleaned_input" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | grep -v '//' | sed 's/^/apps\//' > "$modules_filtered"
 
-                          echo 'Output has been written to' $modules_filtered  ' with the following content:'
+                      echo 'Output has been written to' $modules_filtered  ' with the following content:'
 
-                          cat $modules_filtered
-              
+                      cat $modules_filtered
 
       merge-modular-configs:
         parameters:
