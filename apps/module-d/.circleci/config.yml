@@ -1,0 +1,18 @@
+# Config dedicated for module D
+# All the resources must be prefixed with `module-d-` to avoid conflicts
+
+version: 2.1
+
+jobs:
+  module-d-build:
+    docker:
+      - image: alpine
+    steps:
+      - common-say-hello:
+          to: D
+      - run: echo 'Hello, from module D! :3'
+
+workflows:
+  build:
+    jobs:
+      - module-d-build
