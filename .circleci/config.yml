@@ -95,7 +95,7 @@ orbs:
               command: |
                 modules_filtered=<< parameters.modules-filtered >>
 
-                modules=echo "$(cat << EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; then echo "$row" | sed -e 's/ /\n/g' >> $modules_filtered; done
+                modules=echo "$(cat <<EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; then echo "$row" | sed -e 's/ /\n/g'; done
                 << parameters.modules >>
                 EOF
                 )"
