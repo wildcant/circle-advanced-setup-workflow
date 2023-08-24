@@ -94,14 +94,12 @@ orbs:
               name: Generate the list of modules having changes
               command: |
                 modules_filtered=<< parameters.modules-filtered >>
-                modules=<< parameters.modules >>
 
+                modules=echo "$(cat << EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; then echo "$row" | sed -e 's/ /\n/g' >> $modules_filtered; done
+                << parameters.modules >>
+                EOF
+                )"
                 echo $modules
-
-                echo 'generating diff with turbo'
-                input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
-                echo $input
-                echo ''
 
                 # Remove the square brackets and quotes from the input string
                 cleaned_input=$(echo "$input" | tr -d '[]"' | tr ',' '\n')
