@@ -50,6 +50,7 @@ workflows:
             apps/module-a
             apps/module-b
             apps/module-c
+            apps/module-d
 
 orbs:
   # An "embedded" orb to facilitate config splitting
