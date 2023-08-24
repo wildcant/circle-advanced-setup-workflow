@@ -1,6 +1,23 @@
 #!/bin/bash
 
+
+modules=$(cat <<EOF
+apps/module-a
+apps/module-b
+apps/module-c
+EOF
+) # << parameters.modules >>
+force_all='true' # << parameters.force-all >>
 modules_filtered='output.txt' # << parameters.modules-filtered >>
+
+if [ $force_all == 'true' ]
+then
+  echo 'forcing build in all apps'
+  echo "$modules" > "$modules_filtered"
+  echo 'Output has been written to' $modules_filtered  ' with the following content:'
+  cat $modules_filtered
+  exit
+fi
 
 echo 'generating diff with turbo'
 input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)

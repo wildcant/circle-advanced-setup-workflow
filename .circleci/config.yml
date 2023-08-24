@@ -93,7 +93,19 @@ orbs:
           - run:
               name: Generate the list of modules having changes
               command: |
+                modules=<< parameters.modules >>
+                force_all=<< parameters.force-all >>
                 modules_filtered=<< parameters.modules-filtered >>
+
+                if [ $force_all == 'true' ]
+                then
+                  echo 'forcing build in all apps'
+                  echo "$modules" > "$modules_filtered"
+                  echo 'Output has been written to' $modules_filtered  ' with the following content:'
+                  circleci-agent step halt
+                  cat $modules_filtered
+                  exit
+                fi
 
                 echo 'generating diff with turbo'
                 input=$(npx turbo run build --filter='...^[HEAD^]' --dry-run=json | yq e '.packages' -)
