@@ -99,6 +99,7 @@ orbs:
                 echo 'inspect'
                 echo $modules
                 echo "$modules"
+                echo "$force_all"
                 echo ''
 
                 if [ $force_all == 'true' ]
