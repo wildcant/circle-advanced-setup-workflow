@@ -16,10 +16,6 @@ parameters:
     description: Emergency valve - forcibly build all the modules
     type: boolean
     default: false
-  custom-parameter:
-    description: Some string to pass
-    type: string
-    default: ''
 
 # Custom commands aimed for the main workflows and jobs
 commands:
@@ -31,7 +27,6 @@ commands:
         default: you anonymous
     steps:
       - run: echo 'Greetings to << parameters.to >> from the shared command!'
-      - run: echo 'The value of `custom-parameter` was "<< pipeline.parameters.custom-parameter >>"'
 
 # Common jobs for the main workflows
 jobs:
@@ -50,9 +45,7 @@ workflows:
       - config-splitting/setup-dynamic-config:
           force-all: << pipeline.parameters.force-all >>
           base-revision: main
-          # If A is modified, the job for A will run
-          # Similarly if B is modified, the job for B will run
-          # If C is modified, then the jobs for both C and B (as a dependency) will run
+          # List of all module and apps that will run when force-all is set to true.
           modules: |
             apps/module-a
             apps/module-b
