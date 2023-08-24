@@ -1,1 +1,1 @@
-export const MODULE = 'module-d-change'
+export const MODULE = 'module-d'
