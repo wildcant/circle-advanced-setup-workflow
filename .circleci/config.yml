@@ -93,11 +93,11 @@ orbs:
           - run:
               name: Generate the list of modules having changes
               command: |
-                modules=<< parameters.modules >>
+                # modules=<< parameters.modules >>
                 force_all=<< parameters.force-all >>
                 modules_filtered=<< parameters.modules-filtered >>
                 echo 'inspect'
-                echo $modules
+                # echo $modules
                 # echo "$modules"
                 echo $force_all
                 echo ''
