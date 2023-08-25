@@ -1,0 +1,31 @@
+services:
+  frontend-v1:
+    build:
+      dockerfile: apps/frontend-v1/Dockerfile
+    ports:
+      - '8081:8081'
+    volumes:
+      - frontend-v1-data:/app/apps/frontend-v1/dist
+
+  frontend-v2:
+    build:
+      dockerfile: apps/frontend-v2/Dockerfile
+    ports:
+      - '8080:8080'
+    volumes:
+      - frontend-v2-data:/app/apps/frontend-v2/dist
+
+  nginx:
+    build: .nginx
+    ports:
+      - '80:80'
+    volumes:
+      - frontend-v1-data:/html
+      - frontend-v2-data:/frontend-v2
+    depends_on:
+      - frontend-v1
+      - frontend-v2
+
+volumes:
+  frontend-v1-data:
+  frontend-v2-data:

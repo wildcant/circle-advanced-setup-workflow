@@ -1,0 +1,20 @@
+# Config dedicated for frontend v1
+# All the resources must be prefixed with `frontend-v1-` to avoid conflicts
+
+version: 2.1
+
+jobs:
+  frontend-v1-deploy:
+    - run:
+          name: 👷 Deploy
+          command: echo 'deploy'
+
+workflows:
+  frontend-v1-workflow:
+    jobs:
+      - common-app-build-and-test
+          app: frontend-v1
+
+      - frontend-v1-deploy:
+          requires:
+            - common-app-build-and-test

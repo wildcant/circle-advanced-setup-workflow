@@ -36,6 +36,34 @@ jobs:
     steps:
       - common-say-hello
       - run: echo 'Jobs with `common-` prefix are intended to be shared among modules'
+  common-app-build-and-test:
+    parameters:
+      app:
+        description: Name of the app that will be build and tested. Defaults to building and testing all the apps.
+        type: string
+    docker:
+      - image: cimg/node:17.1.0
+    steps:
+      - checkout
+      - restore_cache:
+          name: ♻️ Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: 📦 Install packages
+          command: yarn install --immutable
+      - run:
+          name: 👷 Build app
+          command: yarn turbo run build --filter=<< parameters.app >>
+      - run:
+          name: 🧪 Test app
+          command: yarn turbo run test --filter=<< parameters.app >>
+      - save_cache:
+          name: 🏗 Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - .yarn/cache
+            - .yarn/unplugged
 
 workflows:
   # The setup workflow
@@ -47,6 +75,8 @@ workflows:
           base-revision: main
           # List of all module and apps that will run when force-all is set to true.
           modules: |
+            apps/frontend-v1
+            apps/frontend-v2
             apps/module-a
             apps/module-b
             apps/module-c
